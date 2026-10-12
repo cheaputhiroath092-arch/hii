@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>A little something for you 💌</title>
+<style>
+:root {
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+
+/* ---------- PAGE THEMES (colors + background) ---------- */
+body.t-pink {
+  --bg1: #ffe3ec; --bg2: #ffc2d6; --card: rgba(255, 255, 255, 0.9); --ink: #4a1f33; --soft: #8a4a64;
+  --accent: #e63977; --accent2: #ff7aa8; --shadow: rgba(230, 57, 119, 0.22); --btn: #ffffff;
+  --bgimg: none; --bgpos: center;
+  --pop: 0.6; --psize: 80px; --pdrift: 80px;
+  --pattern: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cpath d='M20 34C6 24 8 10 20 18C32 10 34 24 20 34Z' fill='white'/%3E%3Cpath transform='translate(40 40) scale(.7)' d='M20 34C6 24 8 10 20 18C32 10 34 24 20 34Z' fill='white'/%3E%3C/svg%3E");
+}
+body.t-yellow {
+  --bg1: #fffbe6; --bg2: #fff0b3; --card: rgba(255, 255, 255, 0.92); --ink: #4a3a10; --soft: #7d6420;
+  --accent: #f2b705; --accent2: #ffd84d; --shadow: rgba(224, 161, 0, 0.22); --btn: #3d2e00;
+  --bgimg: url("bg2.png"); --bgpos: center;
+  --pop: 0; --psize: 48px; --pdrift: 96px;
+  --pattern: none;
+}
+body.t-stitch {
+  --bg1: #e6faff; --bg2: #b3ecf7; --card: rgba(255, 255, 255, 0.92); --ink: #12404d; --soft: #3f7686;
+  --accent: #17b6d6; --accent2: #6fdcf0; --shadow: rgba(23, 182, 214, 0.22); --btn: #ffffff;
+  --bgimg: url("bg3.png"); --bgpos: center;
+  --pop: 0; --psize: 100px; --pdrift: 100px;
+  --pattern: none;
+}
+body.t-minions {
+  --bg1: #e6faff; --bg2: #b3ecf7; --card: rgba(255, 255, 255, 0.92); --ink: #12404d; --soft: #3f7686;
+  --accent: #17b6d6; --accent2: #6fdcf0; --shadow: rgba(23, 182, 214, 0.22); --btn: #ffffff;
+  --bgimg: url("bg4.png"); --bgpos: center;
+  --pop: 0; --psize: 100px; --pdrift: 100px;
+  --pattern: none;
+}
+body.t-space {
+  --bg1: #1a1040; --bg2: #4a1f6b; --card: rgba(255, 255, 255, 0.94); --ink: #2d1b4e; --soft: #6b4f93;
+  --accent: #8b5cf6; --accent2: #f472b6; --shadow: rgba(139, 92, 246, 0.35); --btn: #ffffff;
+  --bgimg: url("bg5.png"); --bgpos: center;
+  --pop: 0; --psize: 100px; --pdrift: 100px;
+  --pattern: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  body.t-pink {
+    --bg1: #2a0f1c; --bg2: #4a1630; --card: rgba(58, 22, 38, 0.9); --ink: #ffe8f0; --soft: #f2b3c9;
+    --accent: #ff5c93; --accent2: #ff8fb3; --shadow: rgba(0, 0, 0, 0.45); --btn: #ffffff; --pop: 0.12;
+  }
+  body.t-yellow {
+    --bg1: #2b2208; --bg2: #4a3a0e; --card: rgba(58, 46, 12, 0.9); --ink: #fff6d6; --soft: #ecd68a;
+    --accent: #f5c518; --accent2: #ffe066; --shadow: rgba(0, 0, 0, 0.45); --btn: #3d2e00; --pop: 0;
+  }
+  body.t-stitch, body.t-minions {
+    --bg1: #08262d; --bg2: #0f4452; --card: rgba(13, 53, 64, 0.9); --ink: #e3fbff; --soft: #9fdbe8;
+    --accent: #2ccbe8; --accent2: #7fe3f5; --shadow: rgba(0, 0, 0, 0.45); --btn: #062a33; --pop: 0;
+  }
+  body.t-space {
+    --bg1: #120a2c; --bg2: #2d1050; --card: rgba(31, 20, 64, 0.92); --ink: #f3e8ff; --soft: #cbb5f0;
+    --accent: #a78bfa; --accent2: #f472b6; --shadow: rgba(0, 0, 0, 0.45); --btn: #ffffff; --pop: 0;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body {
+  background-image: var(--bgimg), linear-gradient(160deg, var(--bg1), var(--bg2));
+  background-size: cover;
+  background-position: var(--bgpos), center;
+  background-repeat: no-repeat;
+  color: var(--ink);
+  font-family: "Quicksand", "Segoe UI", system-ui, -apple-system, sans-serif;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  transition: background 0.6s ease;
+}
+
+body::before {
+  content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image: var(--pattern);
+  background-size: var(--psize) var(--psize);
+  opacity: var(--pop);
+  animation: drift 40s linear infinite;
+}
+@keyframes drift { to { background-position: var(--pdrift) var(--pdrift); } }
+
+.hearts { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 1; }
+.heart { position: absolute; bottom: -60px; opacity: 0.8; animation: rise linear infinite; will-change: transform, opacity; }
+@keyframes rise {
+  0% { transform: translateY(0) rotate(0deg) scale(0.8); opacity: 0; }
+  15% { opacity: 0.9; transform: translateY(-15vh) rotate(10deg) scale(1); }
+  85% { opacity: 0.9; }
+  100% { transform: translateY(-115vh) rotate(35deg) scale(1.1); opacity: 0; }
+}
+
+.card {
+  position: relative; z-index: 2; width: min(90%, 430px);
+  background: var(--card); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border-radius: 32px; padding: 38px 30px; text-align: center;
+  box-shadow: 0 24px 50px var(--shadow);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.card.pop { animation: popCardAnim 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275) both; }
+@keyframes popCardAnim {
+  0% { transform: scale(0.88) translateY(20px); opacity: 0; }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.emoji { font-size: 58px; display: block; margin-bottom: 12px; animation: beat 1.4s ease-in-out infinite; }
+@keyframes beat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.15); } }
+
+h1 { font-size: 26px; margin: 0 0 12px; line-height: 1.3; font-weight: 700; }
+p { font-size: 16.5px; line-height: 1.65; color: var(--soft); margin: 0 0 24px; font-weight: 500; }
+
+.btns { display: flex; gap: 14px; justify-content: center; align-items: center; min-height: 58px; flex-wrap: wrap; }
+button {
+  font: inherit; font-weight: 700; font-size: 16px; border: 0; cursor: pointer;
+  padding: 13px 28px; border-radius: 999px; transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  will-change: transform;
+}
+button:hover { transform: translateY(-3px); }
+button:active { transform: scale(0.95) translateY(0); }
+
+.primary {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: var(--btn);
+  box-shadow: 0 10px 22px var(--shadow);
+}
+.ghost {
+  background: transparent; color: var(--soft);
+  border: 2px solid var(--soft);
+}
+
+.dots { display: flex; gap: 8px; justify-content: center; margin-top: 24px; align-items: center; }
+.dots i { width: 8px; height: 8px; border-radius: 50%; background: var(--soft); opacity: 0.3; transition: all 0.3s ease; }
+.dots i.on { opacity: 1; background: var(--accent); transform: scale(1.3); }
+
+small { display: block; margin-top: 6px; color: var(--soft); opacity: 0.95; font-weight: 700; font-size: 16px; letter-spacing: 0.5px; }
+</style>
+</head>
+<body class="t-pink">
+<div class="hearts" id="hearts"></div>
+
+<main class="card" id="card">
+  <span class="emoji" id="emoji">💌</span>
+  <h1 id="title"></h1>
+  <p id="text"></p>
+  <div class="btns" id="btns"></div>
+  <div class="dots" id="dots"></div>
+</main>
+
+<script>
+(function(){
+  var q = new URLSearchParams(location.search);
+  var FROM = q.get('from') || 'Puthiroth';
+
+  var steps = [
+    {theme:'pink',    e:'💌', t:'This is for Zu Yi, my fav person…', p:"I made this because I would like to tell you, I've a crush on you since the first day of 1st year when I saw you and you are already know about it. -_-", b:'Read More →'},
+    {theme:'yellow',  e:'🌟', t:"About ME ", p:"Let me descibe all I see about you <33 I like seeing your smiles, it makes me fall on you deeply :) your laugh, the way you talk to me is fine. And somehow I feel that I'm loving you more day by day ^_^", b:'Click This Princess →'},
+    {theme:'stitch',  e:'🌚', t:"The Truth about me", p:"I like K'zu Yi a lot with all of my heart🫪 and I need you to open the next page 😳", b:'Last Click →'},
+    {theme:'minions', e:'💖', t:'I hope you would love me back one day🌚', p:"Can we go out somewhere tomorrow?", ask:true}
+  ];
+
+  var glyphSets = {
+    pink:    ['💗','💖','💕','💘','🌸','✨'],
+    yellow:  ['💛','🌼','✨','💛','🌻'],
+    stitch:  ['💙','🩵','✨','💗','🩵'],
+    minions: ['💛','💙','🍌','✨','💛'],
+    space:   ['⭐','✨','💜','🚀','🌙','💫']
+  };
+  var currentTheme = 'pink';
+  var i = 0;
+  var $ = function(id){return document.getElementById(id)};
+
+  function setTheme(name){
+    currentTheme = name;
+    document.body.className = 't-' + name;
+  }
+
+  function popCard(){
+    var card = $('card');
+    card.classList.remove('pop'); void card.offsetWidth; card.classList.add('pop');
+  }
+
+  function render(){
+    var s = steps[i];
+    setTheme(s.theme);
+    popCard();
+
+    $('emoji').textContent = s.e;
+    $('title').textContent = s.t;
+    $('text').textContent = s.p;
+    var btns = $('btns'); btns.innerHTML = '';
+    if(s.ask){
+      var yes = document.createElement('button');
+      yes.className='primary'; yes.textContent='Yes 💕';
+      yes.onclick = celebrate;
+      var no = document.createElement('button');
+      no.className='ghost'; no.textContent='No';
+      dodge(no);
+      btns.appendChild(yes); btns.appendChild(no);
+    } else {
+      var b = document.createElement('button');
+      b.className='primary'; b.textContent=s.b;
+      b.onclick = function(){ i++; render(); };
+      btns.appendChild(b);
+    }
+    $('dots').innerHTML = steps.map(function(_,k){return '<i class="'+(k===i?'on':'')+'"></i>'}).join('');
+  }
+
+  var tries = 0;
+  var noText = ['No','Are you sure?','Really? 🥺','Try again 😳','Pleaseee','Nope, wrong one!'];
+  function dodge(btn){
+    function run(e){
+      if(e) e.preventDefault();
+      tries++;
+      btn.textContent = noText[Math.min(tries, noText.length-1)];
+      btn.style.position='fixed';
+      var maxX = window.innerWidth - btn.offsetWidth - 20;
+      var maxY = window.innerHeight - btn.offsetHeight - 20;
+      btn.style.left = Math.max(15, Math.floor(Math.random() * maxX)) + 'px';
+      btn.style.top = Math.max(15, Math.floor(Math.random() * maxY)) + 'px';
+      btn.style.zIndex = 5;
+    }
+    btn.addEventListener('mouseenter', run);
+    btn.addEventListener('touchstart', run, {passive:false});
+    btn.addEventListener('click', run);
+  }
+
+  function celebrate(){
+    setTheme('space');
+    popCard();
+    $('emoji').textContent='🙀';
+    $('title').textContent='Finally , Zu Yi accepted';
+    $('text').textContent="You just made the best decision of your life. I'll be there, see you my princess. I love you so much Zu Yi <3";
+    $('btns').innerHTML='';
+    $('dots').innerHTML='<small>— ' + FROM + '</small>';
+    for(var k=0; k<50; k++) {
+      setTimeout(function(){ spawn(true) }, k*40);
+    }
+  }
+
+  function spawn(big){
+    var glyphs = glyphSets[currentTheme];
+    var h = document.createElement('span');
+    h.className='heart';
+    h.textContent = glyphs[Math.floor(Math.random()*glyphs.length)];
+    h.style.left = Math.random()*100 + '%';
+    h.style.fontSize = (big ? 24+Math.random()*32 : 16+Math.random()*22) + 'px';
+    h.style.animationDuration = (big ? 2.5+Math.random()*2.5 : 5+Math.random()*5) + 's';
+    $('hearts').appendChild(h);
+    setTimeout(function(){ h.remove() }, 12000);
+  }
+  setInterval(spawn, 550);
+  for(var k=0; k<10; k++) spawn();
+
+  render();
+})();
+</script>
+</body>
+</html>
